@@ -4,20 +4,32 @@ import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // components
-import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup";
+
+import Nav from "./ui-components/Nav";
+import Home from "./components/Home/Home";
+import Contents from "./components/Contents/ContentsList";
 
 function App() {
   return (
     <div>
       <UserAuthContextProvider>
+        <Nav />
         <Routes>
           <Route
-            path="/Home"
+            path="/home"
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contents"
+            element={
+              <ProtectedRoute>
+                <Contents />
               </ProtectedRoute>
             }
           />

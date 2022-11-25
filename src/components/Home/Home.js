@@ -7,7 +7,6 @@ const Home = () => {
 
   return (
     <>
-      <Nav />
       <div className="p-4 box mt-3 text-center">
         Hello Welcome <br />
         {user && user.email}
