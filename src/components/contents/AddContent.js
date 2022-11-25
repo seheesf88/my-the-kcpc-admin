@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import ContentDataService from "./../../services/content.services";
 
@@ -7,6 +8,7 @@ const AddContent = ({ id, setBookId }) => {
   const [date, setDate] = useState(new Date());
   const [flag, setFlag] = useState(true);
   const [message, setMessage] = useState({ error: false, msg: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ const AddContent = ({ id, setBookId }) => {
     try {
       await ContentDataService.addContent(newContent);
       setMessage({ error: false, msg: "New content added successfully!" });
+      navigate("/contents");
     } catch (err) {
       setMessage({ error: true, msg: err.message });
     }

@@ -10,6 +10,7 @@ import Signup from "./components/Signup";
 import Nav from "./ui-components/Nav";
 import Home from "./components/Home/Home";
 import Contents from "./components/Contents/ContentsList";
+import AddContent from "./components/Contents/AddContent";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Contents />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contents/new"
+            element={
+              <ProtectedRoute>
+                <AddContent />
               </ProtectedRoute>
             }
           />
