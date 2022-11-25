@@ -1,4 +1,9 @@
-body {
+.navbar {
+  background-color: #4c4e59b5;
+}
+
+
+/* body {
   background-color: #fafafa;
   display: flex;
   justify-content: center;
@@ -24,7 +29,6 @@ body {
   width: 40px !important;
   height: 38px !important;
 }
-
 
 .header .container {
   justify-content: center;
@@ -79,4 +83,4 @@ table {
   to {
     transform: rotate(360deg);
   }
-}
+} */

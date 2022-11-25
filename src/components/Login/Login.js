@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Form, Alert,  Button} from "react-bootstrap";
+import './Login.scss';
+
 import GoogleButton from "react-google-button";
-import { useUserAuth } from "../context/UserAuthContext";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -34,10 +35,11 @@ const Login = () => {
   };
 
   return (
-    <>
-      <div className="p-4 box">
-        <h2 className="mb-3">Firebase Auth Login</h2>
+    <div className="login">
+      <div className="login__form my-5">
+        <h2 className="mb-3">KCPC admin</h2>
         {error && <Alert variant="danger">{error}</Alert>}
+
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
@@ -61,19 +63,20 @@ const Login = () => {
             </Button>
           </div>
         </Form>
+
         <hr />
-        <div>
+  
+        <div className="login__btn-google">
           <GoogleButton
-            className="g-btn"
             type="dark"
             onClick={ handleGoogleSignIn }
           />
         </div>
       </div>
-      <div className="p-4 box mt-3 text-center">
+      <div className="text-center">
         Don't have an account? <Link to="/signup">Sign up</Link>
       </div>
-    </>
+    </div>
   );
 };
 

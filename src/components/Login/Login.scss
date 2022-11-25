@@ -1,0 +1,15 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__form {
+    width: 40%;
+  }
+
+  &__btn-google {
+    display: flex;
+    justify-content: center;
+  }
+}
