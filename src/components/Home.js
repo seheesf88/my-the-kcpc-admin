@@ -3,10 +3,13 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
 
+import ContentsList from "../components/contents/ContentsList";
+import AddContent from "../components/contents/AddContent";
+
 const Home = () => {
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
-  
+
   const handleLogout = async () => {
     try {
       await logOut();
@@ -26,6 +29,9 @@ const Home = () => {
           Log out
         </Button>
       </div>
+
+      <AddContent />
+      <ContentsList />
     </>
   );
 };
