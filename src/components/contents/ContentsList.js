@@ -36,11 +36,11 @@ const ContentsList = ({ getBookId }) => {
             return (
             <tr key={index} className="row">
               <td className="col-3">
-                {doc.date}
+                {doc.serviceDate}
               </td>
               <td className="col-8">
                 <Link to={`/contents/${doc.id}`}>
-                {doc.title} by content.message.messageBy
+                  {doc.message.title} by {doc.message.messageBy}
                 </Link>
               </td>
               <td className="col-1">

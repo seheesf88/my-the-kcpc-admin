@@ -18,12 +18,10 @@ const AddContent = ({ id, setBookId }) => {
       return;
     }
 
-    console.log('~~', date)
     const newContent = {
       title,
       date
     };
-    console.log(newContent);
 
     try {
       await ContentDataService.addContent(newContent);

@@ -10,7 +10,8 @@ import Signup from "./components/Signup";
 import Nav from "./ui-components/Nav";
 import Home from "./components/Home/Home";
 import Contents from "./components/Contents/ContentsList";
-import AddContent from "./components/Contents/AddContent";
+import CreateContent from "./components/Contents/CreateContent";
+import ShowContent from "./components/Contents/ShowContent";
 
 function App() {
   return (
@@ -38,7 +39,15 @@ function App() {
             path="/contents/new"
             element={
               <ProtectedRoute>
-                <AddContent />
+                <CreateContent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contents/:id"
+            element={
+              <ProtectedRoute>
+                <ShowContent />
               </ProtectedRoute>
             }
           />
