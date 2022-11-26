@@ -21,7 +21,6 @@ function ShowContent() {
     navigate(`/contents/${contentId}/edit`);
   }
 
-
   return (
     <div className="container my-5">
       <h3>{content.serviceDate} - {content.message?.title} </h3>

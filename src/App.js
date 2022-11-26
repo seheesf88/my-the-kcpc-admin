@@ -12,6 +12,7 @@ import Home from "./components/Home/Home";
 import Contents from "./components/Contents/ContentsList";
 import CreateContent from "./components/Contents/CreateContent";
 import ShowContent from "./components/Contents/ShowContent";
+import EditContent from "./components/Contents/EditContent";
 
 function App() {
   return (
@@ -48,6 +49,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ShowContent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contents/:id/edit"
+            element={
+              <ProtectedRoute>
+                <EditContent />
               </ProtectedRoute>
             }
           />

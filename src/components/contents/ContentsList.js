@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import ContentDataService from "./../../services/content.services";
 
-const ContentsList = ({ getBookId }) => {
+const ContentsList = () => {
   const [contents, setContents] = useState([]);
   useEffect(() => {
     getContents();
@@ -11,7 +11,11 @@ const ContentsList = ({ getBookId }) => {
 
   const getContents = async () => {
     const data = await ContentDataService.getAllContents();
-    setContents(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const contents = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    const sortedContents = contents.sort(function(a, b) {
+      return new Date(a.serviceDate) - new Date(b.serviceDate)
+    }).reverse();
+    setContents(sortedContents);
   };
 
   const deleteHandler = async (id) => {

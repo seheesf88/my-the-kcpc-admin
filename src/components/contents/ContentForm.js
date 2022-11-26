@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import FormInput from './../../ui-components/FormInput';
 import FormDateInput from './../../ui-components/FormDateInput';
+import ContentDataService from "./../../services/content.services";
 
 class ContentForm extends Component {
   constructor(props) {
@@ -36,6 +37,48 @@ class ContentForm extends Component {
       }
     }
   }
+
+  componentDidMount(){
+    if (this.props.contentId) {
+      this.getContent(this.props.contentId);
+    }
+  };
+
+  getContent = async (id) => {
+    const res = await ContentDataService.getContent(id);
+    const initValue = res.data();
+
+    this.setState({
+      content: {
+        serviceDate: initValue.serviceDate,
+        youtubeKey: initValue.youtubeKey,
+        openingHymnForFirstService: initValue.openingHymnForFirstService,
+        openingHymnForMainService: {
+          hymn: initValue.openingHymnForMainService.hymn,
+          hymnBy: initValue.openingHymnForMainService.hymnBy        
+        },
+        prayer: initValue.prayer,
+        anthemForFirstService: {
+          hymn: initValue.anthemForFirstService.hymn,
+          hymnBy: initValue.anthemForFirstService.hymnBy      
+        },
+        anthemForMainService: {
+          hymn: initValue.anthemForMainService.hymn,
+          hymnBy: initValue.anthemForMainService.hymnBy        
+        },
+        message: {
+          title: initValue.message.title,
+          script: initValue.message.script,
+          messageBy: initValue.message.messageBy
+        },
+        offertoryBy: initValue.offertoryBy,
+        announcementBy: initValue.announcementBy,
+        doxology: initValue.doxology,
+        benedictionBy: initValue.benedictionBy,
+      }
+    });
+  };
+
 
   handleInput = input => e => {
     if (input === "openingHymnForMainService") {
@@ -90,7 +133,11 @@ class ContentForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addContent(this.state.content)
+    if (this.props.contentId) {
+      this.props.addContent(this.props.contentId, this.state.content)
+    } else {
+      this.props.addContent(this.state.content)
+    }
   }
 
   render() {
@@ -103,7 +150,7 @@ class ContentForm extends Component {
               name="serviceDate"
               label="Service Date"
               placeholder="serviceDate"
-              value={this.state.value}
+              value={this.state.content.serviceDate}
               handleInput={this.handleInput("serviceDate")}
             />
 
@@ -112,7 +159,7 @@ class ContentForm extends Component {
               name="youtubeKey"
               label="Youtube Key"
               placeholder="youtubeKey"
-              value={this.state.value}
+              value={this.state.content.youtubeKey}
               handleInput={this.handleInput("youtubeKey")}
             />
           </div>
@@ -134,7 +181,7 @@ class ContentForm extends Component {
                         id="hymn"
                         name="hymn"
                         placeholder="찬양(2부)"
-                        value={this.state.value}
+                        value={this.state.content.openingHymnForMainService.hymn}
                         handleInput={this.handleInput("openingHymnForMainService")}
                       />
                       </div>
@@ -143,7 +190,7 @@ class ContentForm extends Component {
                           id="hymnBy"
                           name="hymnBy"
                           placeholder="찬양자(2부)"
-                          value={this.state.value}
+                          value={this.state.content.openingHymnForMainService.hymnBy}
                           handleInput={this.handleInput("openingHymnForMainService")}
                         /> 
                       </div>
@@ -155,7 +202,7 @@ class ContentForm extends Component {
                         id="openingHymnForFirstService"
                         name="openingHymnForFirstService"
                         placeholder="찬양(1부)"
-                        value={this.state.value}
+                        value={this.state.content.openingHymnForFirstService}
                         handleInput={this.handleInput()}
                       />
                   </tr>
@@ -166,7 +213,7 @@ class ContentForm extends Component {
                       id="prayer"
                       name="prayer"
                       placeholder="대표기도"
-                      value={this.state.value}
+                      value={this.state.content.prayer}
                       handleInput={this.handleInput()}
                     />
                     </td>
@@ -179,7 +226,7 @@ class ContentForm extends Component {
                         id="hymn"
                         name="hymn"
                         placeholder="찬양"
-                        value={this.state.value}
+                        value={this.state.content.anthemForFirstService.hymn}
                         handleInput={this.handleInput("anthemForFirstService")}
                       />
                       </div>
@@ -188,7 +235,7 @@ class ContentForm extends Component {
                         id="hymnBy"
                         name="hymnBy"
                         placeholder="찬양자"
-                        value={this.state.value}
+                        value={this.state.content.anthemForFirstService.hymnBy}
                         handleInput={this.handleInput("anthemForFirstService")}
                       />                    
                       </div>
@@ -199,7 +246,7 @@ class ContentForm extends Component {
                         id="hymn"
                         name="hymn"
                         placeholder="찬양"
-                        value={this.state.value}
+                        value={this.state.content.anthemForMainService.hymn}
                         handleInput={this.handleInput("anthemForMainService")}
                       />
                       </div>
@@ -208,7 +255,7 @@ class ContentForm extends Component {
                         id="hymnBy"
                         name="hymnBy"
                         placeholder="찬양자"
-                        value={this.state.value}
+                        value={this.state.content.anthemForMainService.hymnBy}
                         handleInput={this.handleInput("anthemForMainService")}
                       />
                       </div>
@@ -222,7 +269,7 @@ class ContentForm extends Component {
                           id="title"
                           name="title"
                           placeholder="말씀제목"
-                          value={this.state.value}
+                          value={this.state.content.message.title}
                           handleInput={this.handleInput("message")}
                         />
                       </div>
@@ -231,7 +278,7 @@ class ContentForm extends Component {
                           id="script"
                           name="script"
                           placeholder="말씀구절"
-                          value={this.state.value}
+                          value={this.state.content.message.script}
                           handleInput={this.handleInput("message")}
                         />
                       </div>
@@ -240,7 +287,7 @@ class ContentForm extends Component {
                           id="messageBy"
                           name="messageBy"
                           placeholder="말씀 전달자"
-                          value={this.state.value}
+                          value={this.state.content.message.messageBy}
                           handleInput={this.handleInput("message")}
                         />
                       </div>
@@ -253,7 +300,7 @@ class ContentForm extends Component {
                         id="offertoryBy"
                         name="offertoryBy"
                         placeholder="헌금위원"
-                        value={this.state.value}
+                        value={this.state.content.offertoryBy}
                         handleInput={this.handleInput()}
                       />
                     </td>
@@ -265,7 +312,7 @@ class ContentForm extends Component {
                         id="announcementBy"
                         name="announcementBy"
                         placeholder="광고"
-                        value={this.state.value}
+                        value={this.state.content.announcementBy}
                         handleInput={this.handleInput()}
                       />
                     </td>
@@ -277,7 +324,7 @@ class ContentForm extends Component {
                       id="doxology"
                       name="doxology"
                       placeholder="찬송"
-                      value={this.state.value}
+                      value={this.state.content.doxology}
                       handleInput={this.handleInput()}
                     />
                     </td>
@@ -289,7 +336,7 @@ class ContentForm extends Component {
                         id="benedictionBy"
                         name="benedictionBy"
                         placeholder="축도"
-                        value={this.state.value}
+                        value={this.state.content.benedictionBy}
                         handleInput={this.handleInput()}
                       />
                     </td>
