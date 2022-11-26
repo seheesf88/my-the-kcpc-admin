@@ -1,10 +1,15 @@
 import { db } from "../firebase-config";
-import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from "firebase/firestore";
 
 const contentCollectionRef = collection( db, "contents" );
 class ContentDataService {
   addContent = (newContent) => {
-    return addDoc(contentCollectionRef, newContent);
+    const data = {
+      ...newContent,
+      createdAt: serverTimestamp()
+    }
+
+    return addDoc(contentCollectionRef, data);
   }
 
   updateContent = (id, updatedContent) => {

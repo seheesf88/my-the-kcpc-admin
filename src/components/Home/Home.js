@@ -1,6 +1,5 @@
 import React from "react";
 import { useUserAuth } from "../../context/UserAuthContext";
-import Nav from "../../ui-components/Nav";
 
 const Home = () => {
   const { user } = useUserAuth();

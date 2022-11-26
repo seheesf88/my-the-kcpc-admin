@@ -5,6 +5,7 @@ import ContentDataService from "./../../services/content.services";
 
 const ContentsList = () => {
   const [contents, setContents] = useState([]);
+
   useEffect(() => {
     getContents();
   }, []);
@@ -15,6 +16,7 @@ const ContentsList = () => {
     const sortedContents = contents.sort(function(a, b) {
       return new Date(a.serviceDate) - new Date(b.serviceDate)
     }).reverse();
+
     setContents(sortedContents);
   };
 
@@ -30,8 +32,9 @@ const ContentsList = () => {
       <table className="row table table-stripped text-left mt-5">
         <thead className="col-12">
           <tr className="row">
-            <th scope="col" className="col-3">Date</th>
-            <th scope="col" className="col-8">Title</th>
+            <th scope="col" className="col-2">Created Date</th>
+            <th scope="col" className="col-2">Service Date</th>
+            <th scope="col" className="col-7">Title</th>
             <th scope="col" className="col-1">Remove</th>
           </tr>
         </thead>
@@ -39,10 +42,13 @@ const ContentsList = () => {
           {contents.map((doc, index) => {
             return (
             <tr key={index} className="row">
-              <td className="col-3">
-                {doc.serviceDate}
+              <td className="col-2">
+                { new Date(doc.createdAt.seconds*1000).toLocaleDateString() }
               </td>
-              <td className="col-8">
+              <td className="col-2">
+                { doc.serviceDate }
+              </td>
+              <td className="col-7">
                 <Link to={`/contents/${doc.id}`}>
                   {doc.message.title} by {doc.message.messageBy}
                 </Link>

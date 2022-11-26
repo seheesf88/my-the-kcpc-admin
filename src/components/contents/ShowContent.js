@@ -12,8 +12,12 @@ function ShowContent() {
   }, []);
 
   const getContent = async (id) => {
-    const res = await ContentDataService.getContent(id);
-    setContent(res.data());
+    try {
+      const res = await ContentDataService.getContent(id);
+      setContent(res.data());
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   const routeChange = () =>{ 
