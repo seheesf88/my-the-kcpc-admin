@@ -9,10 +9,10 @@ import Signup from "./components/Signup";
 
 import Nav from "./ui-components/Nav";
 import Home from "./components/Home/Home";
-import Contents from "./components/Contents/ContentsList";
-import CreateContent from "./components/Contents/CreateContent";
-import ShowContent from "./components/Contents/ShowContent";
-import EditContent from "./components/Contents/EditContent";
+import Contents from "./components/contents/ContentsList";
+import CreateContent from "./components/contents/CreateContent";
+import ShowContent from "./components/contents/ShowContent";
+import EditContent from "./components/contents/EditContent";
 
 function App() {
   return (
