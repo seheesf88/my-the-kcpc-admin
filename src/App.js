@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -13,6 +13,8 @@ import Contents from "./components/contents/ContentsList";
 import CreateContent from "./components/contents/CreateContent";
 import ShowContent from "./components/contents/ShowContent";
 import EditContent from "./components/contents/EditContent";
+import Gallery from "./components/gallery/PhotosList";
+import CreatePhoto from "./components/gallery/CreatePhoto";
 
 function App() {
   return (
@@ -57,6 +59,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <EditContent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/gallery"
+            element={
+              <ProtectedRoute>
+                <Gallery />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/gallery/new"
+            element={
+              <ProtectedRoute>
+                <CreatePhoto />
               </ProtectedRoute>
             }
           />

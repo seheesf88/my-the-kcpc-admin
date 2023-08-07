@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import ContentDataService from "./../../services/content.services";
-import ContentForm from './ContentForm';
+import PhotoDataService from "./../../services/gallery.services";
 
-const CreateContent = () => {
+const CreatePhoto = () => {
   const [message, setMessage] = useState({ error: false, msg: "" });
   const navigate = useNavigate();
 
-  const addContent = async (newContent) => {
+  const addPhoto = async (newPhoto) => {
     try {
-      await ContentDataService.addContent(newContent);
+      await PhotoDataService.addPhoto(newPhoto);
       setMessage({ error: false, msg: "New content added successfully!" });
-      navigate("/contents");
+      navigate("/gallery");
     } catch (err) {
       setMessage({ error: true, msg: err.message });
     }
@@ -30,10 +29,10 @@ const CreateContent = () => {
             {message?.msg}
           </Alert>
         )}
-        <ContentForm addContent={addContent} />
+      here
       </div>
     </>
   );
 };
 
-export default CreateContent;
+export default CreatePhoto;
