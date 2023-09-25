@@ -1,40 +1,46 @@
 import React, { useEffect, useState } from "react";
 import './gallery.scss';
 import PhotoDataService from "./../../services/gallery.services";
-import { Link } from 'react-router-dom';
+
+import { storage } from "../../firebase-config";
+import { ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid"
 
 const Gallery = () => {
-  const [photos, setPhotos] = useState([]);
+  const [photoList, setPhotoList] = useState([]);
+  const [imageUpload, setImageUpload] = useState(null);
+
+  const getPhotos = async () => {
+    const photos = await PhotoDataService.getAllPhotos()
+    setPhotoList(photos)
+  };
+
+  const uploadImage = () => {
+    if(imageUpload === null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`)
+    uploadBytes(imageRef, imageUpload).then(() => {
+      alert('Image uploaded')
+      getPhotos();
+    })
+  }
 
   useEffect(() => {
     getPhotos();
   }, []);
 
-  const getPhotos = async () => {
-    const data = await PhotoDataService.getAllPhotos();
-
-    const photos = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    const sortedContents = photos.sort((a, b) => {
-      return new Date(a.serviceDate) - new Date(b.serviceDate)
-    }).reverse();
-
-    setPhotos(sortedContents);
-  };
-
-  const deleteHandler = async (id) => {
-    await PhotoDataService.deletePhoto(id);
-    getPhotos();
-  };
-
   return (
-    <div className="gallery">
+    <div className="container gallery mt-5">
       <h1>Gallery</h1>
-      <Link to="/gallery/new">Add Photo</Link>
-      <div className="gallery__albums">
+      <input type="file" onChange={(event) => {setImageUpload(event.target.files[0])}} />
+      <button type="button" className="btn btn-primary" onClick={uploadImage}>Post new photo</button>
+      <div className="gallery__albums row mt-5">
         {
-          photos.map((photo, idx) => {
+          photoList.length === 0 ?
+          <div className="col-12">No image</div> :
+          photoList.map((photo, idx) => {
             return (
-              <div className="gallery__albums-photo" key={idx}>
+              <div className="gallery__albums-photo col-4" key={idx}>
+                <img src={photo} className="gallery__albums-photo-img"/>
               </div>
             )
           })

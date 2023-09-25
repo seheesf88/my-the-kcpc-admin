@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import ContentDataService from "./../../services/content.services";
 
 const ContentsList = () => {
   const [contents, setContents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getContents();
@@ -20,15 +21,19 @@ const ContentsList = () => {
     setContents(sortedContents);
   };
 
+  const createHandler = () => {
+    navigate('/contents/new');
+  };
+
   const deleteHandler = async (id) => {
     await ContentDataService.deleteContent(id);
     getContents();
   };
 
   return (
-    <div className="container">
-      <h1>주보</h1>
-      <Link to="/contents/new">Add new</Link>
+    <div className="container mt-5">
+      <h1>Content</h1>
+      <button type="button" className="btn btn-primary" onClick={createHandler}>Create new content</button>
       <table className="row table table-stripped text-left mt-5">
         <thead className="col-12">
           <tr className="row">

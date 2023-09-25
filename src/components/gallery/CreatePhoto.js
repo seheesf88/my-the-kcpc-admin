@@ -1,27 +1,26 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import PhotoDataService from "./../../services/gallery.services";
+import { storage } from "../../firebase-config";
+import { ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid"
 
 const CreatePhoto = () => {
   const [message, setMessage] = useState({ error: false, msg: "" });
-  const navigate = useNavigate();
+  const [imageUpload, setImageUpload] = useState(null);
 
-  const addPhoto = async (newPhoto) => {
-    try {
-      await PhotoDataService.addPhoto(newPhoto);
-      setMessage({ error: false, msg: "New content added successfully!" });
-      navigate("/gallery");
-    } catch (err) {
-      setMessage({ error: true, msg: err.message });
-    }
-  };
+  const uploadImage = () => {
+    if(imageUpload === null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`)
+    uploadBytes(imageRef, imageUpload).then(() => {
+      alert('Image uploaded')
+    })
+  }
  
   return (
     <>
       <div className="p-4 box">
         {message?.msg && (
-          <Alert
+          <Alert 
             variant={message?.error ? "danger" : "success"}
             dismissible
             onClose={() => setMessage("")}
@@ -29,8 +28,9 @@ const CreatePhoto = () => {
             {message?.msg}
           </Alert>
         )}
-      here
       </div>
+      <input type="file" onChange={(event) => {setImageUpload(event.target.files[0])}} />
+      <button onClick={uploadImage}>POST</button>
     </>
   );
 };
