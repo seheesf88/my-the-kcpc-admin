@@ -13,8 +13,13 @@ import ContentsList from "./pages/contents/ContentsList";
 import CreateContent from "./pages/contents/CreateContent";
 import ContentDetails from "./pages/contents/ContentDetails";
 import EditContent from "./pages/contents/EditContent";
+
 import Gallery from "./pages/gallery/PhotosList";
 import CreatePhoto from "./pages/gallery/CreatePhoto";
+
+import Offering from "./pages/offering/Offering";
+import Announcements from "./pages/announcements/Announcements";
+import Broadcasting from "./pages/broadcasting/Broadcasting";
 
 function App() {
   return (
@@ -58,6 +63,30 @@ function App() {
           element={
             <ProtectedRoute>
               <EditContent />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/annoucements"
+          element={
+            <ProtectedRoute>
+              <Announcements />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/broadcasting"
+          element={
+            <ProtectedRoute>
+              <Broadcasting />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/offering"
+          element={
+            <ProtectedRoute>
+              <Offering />
             </ProtectedRoute>
           }
         />

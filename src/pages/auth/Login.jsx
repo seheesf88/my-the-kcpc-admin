@@ -17,6 +17,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
     try {
+      debugger
       await logIn(email, password);
       navigate("/home");
     } catch (err) {
