@@ -1,6 +1,4 @@
-import React from 'react';
-
-function FormInput(props) {
+function FormDateInput(props) {
   return (
     <div className="row my-1">
       { props.label &&
@@ -8,10 +6,10 @@ function FormInput(props) {
           {props.label}:
         </label>
       }
-      <div className={ props.label ? "col-10" : "col-12" }>
+      <div className={`${props.label ? "col-10" : "col-12"}`}>
         <input
           className="form-control"
-          type="text"
+          type="date"
           id={props.id}
           name={props.name}
           value={props.value}
@@ -23,4 +21,4 @@ function FormInput(props) {
   );
 }
 
-export default FormInput
+export default FormDateInput

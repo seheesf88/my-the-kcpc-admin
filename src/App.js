@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { UserAuthContextProvider } from "./context/UserAuthContext";
+import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 
 // components
@@ -8,7 +8,7 @@ import NavBar from "./components/layouts/NavBar";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 // pages
-import Home from "./pages/Home/Home";
+import Home from "./pages/home/Home";
 import ContentsList from "./pages/contents/ContentsList";
 import CreateContent from "./pages/contents/CreateContent";
 import ContentDetails from "./pages/contents/ContentDetails";
@@ -18,7 +18,7 @@ import CreatePhoto from "./pages/gallery/CreatePhoto";
 
 function App() {
   return (
-    <UserAuthContextProvider>
+    <AuthContextProvider>
       <NavBar />
       <Routes>
         <Route
@@ -80,7 +80,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-    </UserAuthContextProvider>
+    </AuthContextProvider>
   );
 }
 

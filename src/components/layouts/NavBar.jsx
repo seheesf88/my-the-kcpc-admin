@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
-import { useUserAuth } from '../../context/UserAuthContext'
+import { useUserAuth } from "./../../hooks/useAuthContext"
 import './layout.scss'
 
-function NavBar() {
+const NavBar = () => {
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
 

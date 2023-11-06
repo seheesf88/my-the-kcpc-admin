@@ -4,7 +4,7 @@ import { Form, Alert, Button } from "react-bootstrap";
 import './auth.scss';
 
 import GoogleButton from "react-google-button";
-import { useUserAuth } from '../../context/UserAuthContext';
+import { useUserAuth } from "./../../hooks/useAuthContext"
 
 const Login = () => {
   const [email, setEmail] = useState("");

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,9 +9,9 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 
-const userAuthContext = createContext();
+export const AuthContext = createContext();
 
-export function UserAuthContextProvider({ children }) {
+export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   function signUp(email, password) {
@@ -42,14 +42,10 @@ export function UserAuthContextProvider({ children }) {
   }, []);
 
   return (
-    <userAuthContext.Provider
+    <AuthContext.Provider
       value={{ user, logIn, signUp, logOut, googleSignIn }}
     >
       {children}
-    </userAuthContext.Provider>
+    </AuthContext.Provider>
   );
-}
-
-export function useUserAuth() {
-  return useContext(userAuthContext);
 }

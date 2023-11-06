@@ -17,22 +17,20 @@ const CreateContent = () => {
       setMessage({ error: true, msg: err.message });
     }
   };
- 
+
   return (
-    <>
-      <div className="p-4 box">
-        {message?.msg && (
-          <Alert
-            variant={message?.error ? "danger" : "success"}
-            dismissible
-            onClose={() => setMessage("")}
-          >
-            {message?.msg}
-          </Alert>
-        )}
-        <ContentForm addContent={addContent} />
-      </div>
-    </>
+    <div className="p-4 box">
+      {message?.msg && (
+        <Alert
+          variant={message?.error ? "danger" : "success"}
+          dismissible
+          onClose={() => setMessage("")}
+        >
+          {message?.msg}
+        </Alert>
+      )}
+      <ContentForm addContent={addContent} />
+    </div>
   );
 };
 
