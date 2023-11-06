@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import ContentDataService from "./../../services/content.services";
-import ContentForm from './ContentForm';
+import ContentForm from "./../../components/forms/ContentForm"
 
 const EditContent = () => {
   const [message, setMessage] = useState({ error: false, msg: "" });
@@ -20,20 +20,18 @@ const EditContent = () => {
   };
  
   return (
-    <>
-      <div className="p-4 box">
-        {message?.msg && (
-          <Alert
-            variant={message?.error ? "danger" : "success"}
-            dismissible
-            onClose={() => setMessage("")}
-          >
-            {message?.msg}
-          </Alert>
-        )}
-        <ContentForm addContent={editHandler} contentId={contentId}/>
-      </div>
-    </>
+    <div className="p-4 box">
+      {message?.msg && (
+        <Alert
+          variant={message?.error ? "danger" : "success"}
+          dismissible
+          onClose={() => setMessage("")}
+        >
+          {message?.msg}
+        </Alert>
+      )}
+      <ContentForm addContent={editHandler} contentId={contentId}/>
+    </div>
   );
 };
 

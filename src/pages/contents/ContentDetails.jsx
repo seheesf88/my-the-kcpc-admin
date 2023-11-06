@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ContentDataService from "./../../services/content.services";
 
-function ShowContent() {
+function ContentDetails() {
   const [content, setContent] = useState({})
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const contentId = window.location.pathname.split('/')[2]
@@ -20,7 +20,7 @@ function ShowContent() {
     }
   };
 
-  const routeChange = () =>{ 
+  const routeChange = () => {
     const contentId = window.location.pathname.split('/')[2]
     navigate(`/contents/${contentId}/edit`);
   }
@@ -107,4 +107,4 @@ function ShowContent() {
   )
 }
 
-export default ShowContent
+export default ContentDetails

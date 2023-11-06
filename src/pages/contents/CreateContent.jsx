@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import ContentDataService from "./../../services/content.services";
-import ContentForm from './ContentForm';
+import ContentForm from "./../../components/forms/ContentForm"
 
 const CreateContent = () => {
   const [message, setMessage] = useState({ error: false, msg: "" });

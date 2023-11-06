@@ -1,8 +1,8 @@
 import { Component } from 'react';
 
-import FormInput from './../../ui-components/FormInput';
-import FormDateInput from './../../ui-components/FormDateInput';
-import ContentDataService from "./../../services/content.services";
+import FormInput from '../ui-components/FormInput';
+import FormDateInput from '../ui-components/FormDateInput';
+import ContentDataService from '../../services/content.services';
 
 class ContentForm extends Component {
   constructor(props) {
