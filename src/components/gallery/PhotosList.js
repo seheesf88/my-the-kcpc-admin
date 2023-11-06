@@ -3,7 +3,7 @@ import './gallery.scss';
 import PhotoDataService from "./../../services/gallery.services";
 
 import { storage } from "../../firebase-config";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid"
 
 const Gallery = () => {
@@ -18,10 +18,15 @@ const Gallery = () => {
   const uploadImage = () => {
     if(imageUpload === null) return;
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`)
-    uploadBytes(imageRef, imageUpload).then(() => {
-      alert('Image uploaded')
-      getPhotos();
-    })
+
+    uploadBytes(imageRef, imageUpload)
+      .then(() => {
+        alert('Image uploaded')
+        getPhotos();
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+      });
   }
 
   useEffect(() => {
